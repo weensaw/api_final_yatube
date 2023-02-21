@@ -1,4 +1,3 @@
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, mixins, permissions, viewsets
 from rest_framework.pagination import LimitOffsetPagination
@@ -13,8 +12,7 @@ from posts.models import Group, Post
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (AuthorOrReadOnly,
-                          permissions.IsAuthenticatedOrReadOnly)
+    permission_classes = (AuthorOrReadOnly,)
     pagination_class = LimitOffsetPagination
     search_fields = ('=author')
     ordering_fields = ('pub_date', 'author')
@@ -61,8 +59,3 @@ class FollowViewSet(mixins.CreateModelMixin,
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-    def perform_destroy(self, follow):
-        if follow.user != self.request.user:
-            raise PermissionDenied('Изменение чужого контента запрещено!')
-        super(FollowViewSet, self).perform_destroy(follow)

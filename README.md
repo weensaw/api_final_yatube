@@ -6,22 +6,58 @@
 Клонировать этот репозиторий себе на устройство можно несколькоми способами:
 - Можно использовать HTTPS, SSH или GitHub CLI.
 - Можно скачать архивом.
+- git clone git@github.com:wensaw/api_final_yatube.git
+```
+
+```
+cd yatube_api
+```
+
+Cоздать и активировать виртуальное окружение:
+
+```
+python3 -m venv env
+```
+
+* Если у вас Linux/macOS
+
+    ```
+    source env/bin/activate
+    ```
+
+* Если у вас windows
+
+    ```
+    source env/scripts/activate
+    ```
+
+```
+python3 -m pip install --upgrade pip
+```
+
+Установить зависимости из файла requirements.txt:
+
+```
+pip install -r requirements.txt
+```
+
+Выполнить миграции:
+
+```
+python3 manage.py migrate
+```
+
+Запустить проект:
+
+```
+python3 manage.py runserver
+```
 
 ##Вот несколько примеров запросов к API:
 
-- Запрос к API OpenWeatherMap, чтобы получить погодные данные для определенного города:
-bash
-Copy code
-https://api.openweathermap.org/data/2.5/weather?q=London&appid=your_api_key
-В этом запросе мы указываем API-ключ и название города ("London"). API возвращает данные о погоде в формате JSON, которые можно использовать для отображения погоды на сайте или в приложении.
-
-- Запрос к API GitHub, чтобы получить список репозиториев пользователя:
-ruby
-Copy code
-https://api.github.com/users/username/repos
-В этом запросе мы указываем имя пользователя вместо "username". API возвращает список репозиториев пользователя в формате JSON.
-
-- Запрос к API Google Maps, чтобы получить координаты для определенного места:
-ruby
-https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=your_api_key
-В этом запросе мы указываем адрес и API-ключ. API возвращает координаты для этого места в формате JSON.
+- Запрос к API Yatube
+```
+Например по адресу http://127.0.0.1:8000/redoc/ будет доступна документация для API Yatube.
+```
+Данные об id пользователя можно получить по этому адресу http://127.0.0.1:8000/api/users/me/
+```
